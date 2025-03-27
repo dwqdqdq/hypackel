@@ -1,159 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Drive</title>
-    <!-- Google Font Link for Poppins (Thin font) -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, #111, #222);
-            color: white;
-            overflow-y: auto;
-            position: relative;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games | Hypackel</title>
+  <link rel="icon" type="image/png" href="/favicon.ico" />
+  <link rel="stylesheet" href="../assets/css/games.css" />
+  <link rel="stylesheet" href="search.css">
+  <script src="search.js"></script>
+  <script src="/fork/0/assets/js/nodrag.js"></script>
+  <link rel="stylesheet" href="/fork/0/assets/css/tos.css">
+  <link rel="stylesheet" href="/fork/0/assets/css/rainbow.css">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
 
-        /* Transparent Header with neon text effect */
-        .header {
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 10px;
-            background: rgba(0, 0, 0, 0.3); /* Transparent background */
-            color: white;
-            font-size: 50px; /* Increased font size for better visibility */
-            font-weight: 100; /* Thin weight for the Poppins font */
-            text-transform: uppercase;
-            font-family: 'Poppins', sans-serif;
-            text-shadow: 
-                0 0 5px #ffffff, 
-                0 0 10px #ffffff, 
-                0 0 20px #FF0000, 
-                0 0 30px #FF0000, 
-                0 0 40px #FF0000, 
-                0 0 50px #FF0000, 
-                0 0 75px #FF0000; /* Neon Effect */
-        }
+    /* Subtitle Styles */
+    .subtitle {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 600;
+      color: #FF0000;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin-top: 20px;
+    }
 
-        .game-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 150px;
-        }
+    /* Search bar styles */
+    .search-container {
+      text-align: center;
+      padding-top: 20px;
+    }
 
-        .game-card {
-            background: #333;
-            color: white;
-            border-radius: 10px;
-            margin: 20px;
-            width: 300px;
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            cursor: pointer;
-        }
+    #search-bar {
+      width: 80%;
+      padding: 12px;
+      font-size: 1.2rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 2px solid #333;
+      border-radius: 12px;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
 
-        .game-card:hover {
-            transform: scale(1.05);
-            background-color: #444;
-        }
+    #search-bar:focus {
+      outline: none;
+      border-color: #00ff00;
+    }
 
-        .image-container {
-            height: 150px;
-            margin-bottom: 15px;
-        }
+    /* Tab cloak dropdown styles */
+    #tabCloak {
+      width: 80%;
+      padding: 12px;
+      font-size: 1.1rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: 2px solid #333;
+      border-radius: 12px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
 
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-        }
+    #tabCloak:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
 
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            color: #bbb;
-        }
+    /* Game container and card styles */
+    .game-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
 
-        @media (max-width: 768px) {
-            .game-card {
-                width: 250px;
-            }
-        }
-    </style>
+    .game-card {
+      width: 250px;
+      margin: 10px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      background-color: #222;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+
+    .image-container {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .game-card h3 {
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 10px;
+      margin: 0;
+      background-color: #333;
+    }
+
+    /* Footer styles */
+    footer {
+      margin-bottom: 4em;
+      margin-top: 9em;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Transparent header with neon effect -->
-    <div class="header">
-        Hypackel Remodified
-    </div>
+  <div class="subtitle">
+    Hypackel Remodified
+  </div>
 
-    <div class="game-container" id="game-container"></div>
+  <div class="search-container">
+    <input type="text" id="search-bar" placeholder="Search..." oninput="search()" class="search-input" />
+  </div>
 
-    <footer class="footer">
-        <center>&copy; 2023 Hypackel<br><br>
-            <div align='center'>
-            </div>
-        </center>
-    </footer>
 
-    <script>
-        fetch('games.json')
-            .then(response => response.json())
-            .then(data => {
-                const gameContainer = document.getElementById('game-container');
+  <div class="game-container" id="game-container">
+    <!-- Game Cards will be populated here via the script -->
+  </div>
 
-                data.forEach(game => {
-                    const gameCard = document.createElement('div');
-                    gameCard.classList.add('game-card');
+  <footer>
+    <center>&copy; 2023 Hypackel</center>
+  </footer>
 
-                    gameCard.addEventListener('click', function () {
-                        if (game.requiresProxy) {
-                            const userResponse = prompt('A Proxy or VPN is required to play this game. Do you have a proxy or VPN enabled? (yes/no)');
+  <script>
+    fetch('games.json')
+      .then(response => response.json())
+      .then(data => {
+        const gameContainer = document.getElementById('game-container');
 
-                            if (userResponse && userResponse.toLowerCase() === 'yes') {
-                                window.location.href = game.url;
-                            } else {
-                                alert('You need a proxy or VPN to play this game. Please enable one and come back.');
-                            }
-                        } else {
-                            window.location.href = game.url;
-                        }
-                    });
+        data.forEach(game => {
+          const gameCard = document.createElement('div');
+          gameCard.classList.add('game-card');
 
-                    const imageContainer = document.createElement('div');
-                    imageContainer.classList.add('image-container');
+          gameCard.addEventListener('click', function () {
+            if (game.requiresProxy) {
+              const userResponse = prompt('A Proxy or VPN is required to play this game. Do you have a proxy or VPN enabled? (yes/no)');
 
-                    const img = document.createElement('img');
-                    img.src = game.imageSrc;
-                    img.onerror = function () {
-                        this.src = '/fork/image-placeholder.png';
-                    };
+              if (userResponse && userResponse.toLowerCase() === 'yes') {
+                window.location.href = game.url;
+              } else {
+                alert('You need a proxy or VPN to play this game. Please enable one and come back.');
+              }
+            } else {
+              window.location.href = game.url;
+            }
+          });
 
-                    const h3 = document.createElement('h3');
-                    h3.textContent = game.name;
+          const imageContainer = document.createElement('div');
+          imageContainer.classList.add('image-container');
 
-                    imageContainer.appendChild(img);
-                    gameCard.appendChild(imageContainer);
-                    gameCard.appendChild(h3);
-                    gameContainer.appendChild(gameCard);
-                });
-            })
-            .catch(error => {
-                console.error('Error loading JSON data:', error);
-            });
-    </script>
+          const img = document.createElement('img');
+          img.src = game.imageSrc;
+          img.onerror = function () {
+            this.src = '/fork/image-placeholder.png';
+          };
 
-    <script src="/vobs.js"></script>
+          const h3 = document.createElement('h3');
+          h3.textContent = game.name;
+
+          imageContainer.appendChild(img);
+          gameCard.appendChild(imageContainer);
+          gameCard.appendChild(h3);
+          gameContainer.appendChild(gameCard);
+        });
+      })
+      .catch(error => {
+        console.error('Error loading JSON data:', error);
+      });
+  </script>
 </body>
+
 </html>
