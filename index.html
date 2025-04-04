@@ -140,31 +140,13 @@
                 align-items: center;
             }
         }
-
-        /* FAQ Section */
-        .faq-container {
-            margin-top: 30px;
-            width: 80%;
-            max-width: 800px;
-        }
-        .faq-item {
-            background: #333;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
+        .what-is-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            font-size: 40px;
             font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .faq-answer {
-            display: none;
-            padding: 10px;
-            background: #444;
-            border-radius: 8px;
-            margin-top: 5px;
+            color: #ff6600;
         }
     </style>
 </head>
@@ -196,43 +178,37 @@
         </div>
     </div>
 
-    <!-- FAQ Section -->
-    <div class="faq-container">
-        <div class="faq-item" onclick="toggleFaq(1)">
-            What is Hypackel? <span id="faq-icon-1">➕</span>
-        </div>
-        <div class="faq-answer" id="faq-1">
-            Hypackel is a remodified version of a project with new features.
-        </div>
-
-        <div class="faq-item" onclick="toggleFaq(2)">
-            Is this official? <span id="faq-icon-2">➕</span>
-        </div>
-        <div class="faq-answer" id="faq-2">
-            No, we are not affiliated with the original developers.
-        </div>
-
-        <div class="faq-item" onclick="toggleFaq(3)">
-            How do I contact support? <span id="faq-icon-3">➕</span>
-        </div>
-        <div class="faq-answer" id="faq-3">
-            You can contact us on Telegram via the link above.
-        </div>
-    </div>
-
     <script>
-        function toggleFaq(id) {
-            let answer = document.getElementById(`faq-${id}`);
-            let icon = document.getElementById(`faq-icon-${id}`);
-            if (answer.style.display === "none" || answer.style.display === "") {
-                answer.style.display = "block";
-                icon.textContent = "➖";
-            } else {
-                answer.style.display = "none";
-                icon.textContent = "➕";
+        function getParameterByName(name) {
+            let urlParams = new URLSearchParams(window.location.search);
+            return urlParams.has(name);
+        }
+
+        function redirectIfCloaked() {
+            if (getParameterByName("iscloaked")) {
+                let newTab = window.open("about:blank", "_blank");
+                if (newTab) {
+                    newTab.document.write(`
+                        <html>
+                            <head>
+                                <title>Loading...</title>
+                            </head>
+                            <body style="margin:0;">
+                                <iframe src="https://example.com" style="width:100vw; height:100vh; border:none;"></iframe>
+                            </body>
+                        </html>
+                    `);
+                    newTab.document.close();
+                    window.location.href = "https://www.google.com"; // Redirect current tab
+                } else {
+                    alert("Popup blocked! Please allow pop-ups for this site.");
+                }
             }
         }
+
+        document.addEventListener("DOMContentLoaded", redirectIfCloaked);
     </script>
 
 </body>
 </html>
+
