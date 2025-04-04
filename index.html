@@ -51,10 +51,6 @@
             color: #ff6600;
             text-shadow: 0 0 15px #ff6600, 0 0 30px #ff6600;
         }
-        .subtitle {
-            font-size: 28px;
-            color: #bbb;
-        }
         .motd {
             font-size: 18px;
             color: #ccc;
@@ -144,20 +140,37 @@
                 align-items: center;
             }
         }
-        .what-is-container {
-            width: 100%;
-            text-align: center;
-            padding: 20px;
-            font-size: 40px;
+
+        /* FAQ Section */
+        .faq-container {
+            margin-top: 30px;
+            width: 80%;
+            max-width: 800px;
+        }
+        .faq-item {
+            background: #333;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
             font-weight: bold;
-            color: #ff6600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background: #444;
+            border-radius: 8px;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
+
     <div class="header">Hypackel - A new way of Hypackel, but remodified | We are not Hypackel's original developers</div>
-
-
 
     <div class="container">
         <div class="text-content">
@@ -179,26 +192,47 @@
                 <span class="dot green"></span>
                 <span style="margin-left: 10px;">Introduction to Hypackel</span>
             </div>
-            <iframe src="https://www.youtube.com/embed/MoCun0uniCQ?si=2dzaraUMluvrfYXe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/MoCun0uniCQ?si=2dzaraUMluvrfYXe" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-container">
+        <div class="faq-item" onclick="toggleFaq(1)">
+            What is Hypackel? <span id="faq-icon-1">➕</span>
+        </div>
+        <div class="faq-answer" id="faq-1">
+            Hypackel is a remodified version of a project with new features.
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(2)">
+            Is this official? <span id="faq-icon-2">➕</span>
+        </div>
+        <div class="faq-answer" id="faq-2">
+            No, we are not affiliated with the original developers.
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(3)">
+            How do I contact support? <span id="faq-icon-3">➕</span>
+        </div>
+        <div class="faq-answer" id="faq-3">
+            You can contact us on Telegram via the link above.
         </div>
     </div>
 
     <script>
-        const quotes = [
-            "The best way to predict the future is to create it. - Abraham Lincoln",
-            "Success is not final, failure is not fatal: it is the courage to continue that counts. - Winston Churchill",
-            "Do what you can, with what you have, where you are. - Theodore Roosevelt",
-            "The only limit to our realization of tomorrow is our doubts of today. - Franklin D. Roosevelt",
-            "In the middle of every difficulty lies opportunity. - Albert Einstein"
-        ];
-        
-        function getDailyQuote() {
-            const date = new Date();
-            const index = date.getDate() % quotes.length;
-            document.getElementById("daily-quote").innerText = quotes[index];
+        function toggleFaq(id) {
+            let answer = document.getElementById(`faq-${id}`);
+            let icon = document.getElementById(`faq-icon-${id}`);
+            if (answer.style.display === "none" || answer.style.display === "") {
+                answer.style.display = "block";
+                icon.textContent = "➖";
+            } else {
+                answer.style.display = "none";
+                icon.textContent = "➕";
+            }
         }
-        
-        document.addEventListener("DOMContentLoaded", getDailyQuote);
     </script>
+
 </body>
 </html>
